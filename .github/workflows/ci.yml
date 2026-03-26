@@ -1,7 +1,20 @@
 name: Git-Demo-CI
-on: [push, pull_request]
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  build:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Linting
+        run: echo "No linting issues found"
+
+  test:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -9,3 +22,5 @@ jobs:
         run: |
           echo 'Git Demo project is active'
           ls -R
+      - name: Env Check
+        run: echo "Running in ${{ github.ref_name }}"

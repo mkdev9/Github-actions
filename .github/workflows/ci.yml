@@ -1,0 +1,11 @@
+name: Git-Demo-CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run health check
+        run: |
+          echo 'Git Demo project is active'
+          ls -R
